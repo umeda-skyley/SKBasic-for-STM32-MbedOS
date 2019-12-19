@@ -148,5 +148,15 @@ READY
  c = 305419896  HEX() = 12345678  HEX4() = 5678  HEX2() = 78
 ```
 
+## Lチカ
+```
+9000 while 1
+9010   led1 = 1
+9020   wait(1000)
+9030   led1 = 0
+9040   wait(1000)
+9050 endwh
+```
+
 # もっと詳しく
 https://github.com/umeda-skyley/SKBasic-for-STM32-MbedOS/wiki
