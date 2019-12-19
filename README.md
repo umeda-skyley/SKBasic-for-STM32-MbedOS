@@ -7,7 +7,7 @@ SKBasicは、"KLBasic"をSTM32/MbedOS環境に移植したBASICインタプリ�
 ```
  basic(enter)
  
- SKBasic v0.9
+ SKBasic for STM32/Mbed5 v0.9
  READY
  >
 ```
@@ -59,17 +59,7 @@ Basicモードのプロンプトから実行可能な命令をダイレクトコ
  >list ports(enter)
  
  List of ports --
- s01           s02           s03           s04           s05
- s06           s07           s08           s09           s0a
- s0b           s0c           s0d           s0e           s0f
- s10           s11           s12           s13           s14
- s15           s16           s17           s18           s19
- s1a           s1b           s1c           s1d           s1e
- s1f           s20           s21           s22           s23
- s24           s25           s26           s27           s28
- sff           timer         erxorigin     erxdst        erxmsgid
- erxselector   erxrssi       erxlen        eackstatus    eackdst
- eackmsgid
+led1          led2          timer1        timer2
  
  
  >
@@ -92,7 +82,7 @@ Basicモードのプロンプトから実行可能な命令をダイレクトコ
 他にも多くのコマンドが用意されています。詳しくはwikiを参照してください。
 
 # サンプルコード
-**for next, data, read, restore
+## or next, data, read, restoreの使い方
 ```
  >list
  
@@ -120,7 +110,7 @@ Basicモードのプロンプトから実行可能な命令をダイレクトコ
  >
 ```
 
-**print, hex(), hex2, hex4(), gosub, label
+## print, hex(), hex2, hex4(), gosub, labelの使い方
 ```
  >list
  
@@ -146,7 +136,7 @@ Basicモードのプロンプトから実行可能な命令をダイレクトコ
  c = 305419896  HEX() = 12345678  HEX4() = 5678  HEX2() = 78
 ```
 
-##基本コマンドを網羅したテストコード
+## 基本コマンドを網羅したテストコード
 ```
  110 '  Test of KLBasic functions and operators
  120 '
