@@ -77,7 +77,8 @@ led1          led2          timer1        timer2
 ```
 
 ## LEDの制御
-led1, led2が予約語として組み込まれています。~
+led1, led2が予約語として組み込まれています。
+
 ターゲットボード上のLED1を点灯：
 ```
 >led1 = 1
@@ -90,8 +91,7 @@ READY
 >
 ```
 
-他にも多くのコマンドが用意されています。~
-詳しくはwikiを参照してください。~
+他にも多くのコマンドが用意されています。詳しくはwikiを参照してください。
 https://github.com/umeda-skyley/SKBasic-for-STM32-MbedOS/wiki
 
 # サンプルコード
@@ -256,5 +256,6 @@ https://github.com/umeda-skyley/SKBasic-for-STM32-MbedOS/wiki
  9360 return
 ```
 
-# Wiki
+# もっと詳しく
+wikiはこちらです。
 https://github.com/umeda-skyley/SKBasic-for-STM32-MbedOS/wiki
