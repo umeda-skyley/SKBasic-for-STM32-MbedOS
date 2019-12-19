@@ -18,11 +18,7 @@ Basicモードでexit命令を実行するとコマンドモードへ戻りま�
  OK
 ```
 
-# ダイレクトコマンド
-Basicモードのプロンプトから実行可能な命令をダイレクトコマンドと言います。主にBasicプログラムに対する表示、実行、保存などの命令があります。
-コマンドは大文字・小文字の区別がありません。
-コマンドサンプル中の"(enter)"はEnterキーの押下を表します。
-
+# コマンドの紹介
 ## list
 プログラムリストの表示
 ```
@@ -80,6 +76,7 @@ led1          led2          timer1        timer2
 ```
 
 他にも多くのコマンドが用意されています。詳しくはwikiを参照してください。
+https://github.com/umeda-skyley/SKBasic-for-STM32-MbedOS/wiki
 
 # サンプルコード
 ## or next, data, read, restoreの使い方
