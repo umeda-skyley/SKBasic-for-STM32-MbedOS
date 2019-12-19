@@ -91,8 +91,7 @@ READY
 >
 ```
 
-他にも多くのコマンドが用意されています。詳しくはwikiを参照してください。
-https://github.com/umeda-skyley/SKBasic-for-STM32-MbedOS/wiki
+他にも多くのコマンドが用意されています。
 
 # サンプルコード
 ## or next, data, read, restoreの使い方
@@ -257,5 +256,4 @@ https://github.com/umeda-skyley/SKBasic-for-STM32-MbedOS/wiki
 ```
 
 # もっと詳しく
-wikiはこちらです。
 https://github.com/umeda-skyley/SKBasic-for-STM32-MbedOS/wiki
