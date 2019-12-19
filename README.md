@@ -90,7 +90,8 @@ READY
 >
 ```
 
-他にも多くのコマンドが用意されています。詳しくはwikiを参照してください。
+他にも多くのコマンドが用意されています。
+詳しくはwikiを参照してください。
 https://github.com/umeda-skyley/SKBasic-for-STM32-MbedOS/wiki
 
 # サンプルコード
@@ -254,3 +255,6 @@ https://github.com/umeda-skyley/SKBasic-for-STM32-MbedOS/wiki
  9350 print "c = ";c; " HEX() = "; hex(c); " HEX4() = "; hex4(c); " HEX2() = "; hex2(c)
  9360 return
 ```
+
+# Wiki
+https://github.com/umeda-skyley/SKBasic-for-STM32-MbedOS/wiki
