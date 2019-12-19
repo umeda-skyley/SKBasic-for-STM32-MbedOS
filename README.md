@@ -152,9 +152,9 @@ READY
 ```
 9000 while 1
 9010   led1 = 1
-9020   wait(1000)
+9020   wait 1000
 9030   led1 = 0
-9040   wait(1000)
+9040   wait 1000
 9050 endwh
 ```
 
