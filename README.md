@@ -1,27 +1,31 @@
 # What is SKBasic
-SKBasicは組み込み用のBASICインタプリタです。STM32/MbedOS 5環境で実装されています。
+SKBasicは、"KLBasic"をSTM32/MbedOS環境に移植したBASICインタプリタです。
+マイコンプログラムをもっと手軽で素早く開発できるよう、いくつかの機能拡張を行っています。
 
-#起動と終了
+##起動と終了
 コマンドモードとBasicモードがあります。起動直後はコマンドモードになっており、以下のように入力することでBasicモードへ遷移します。
-
+```
  basic(enter)
  
  SKBasic v0.9
  READY
  >
+```
 
 Basicモードでexit命令を実行するとコマンドモードへ戻ります。
-
+```
  > exit(enter)
  OK
+```
 
 #ダイレクトコマンド
 Basicモードのプロンプトから実行可能な命令をダイレクトコマンドと言います。主にBasicプログラムに対する表示、実行、保存などの命令があります。
 コマンドは大文字・小文字の区別がありません。
 コマンドサンプル中の"(enter)"はEnterキーの押下を表します。
 
-**list [#bbc5e156]
+##list
 プログラムリストの表示
+```
  >list(enter)
  
  110 '  Test of KLBasic functions and operators
@@ -34,8 +38,12 @@ Basicモードのプロンプトから実行可能な命令をダイレクトコ
  .
  .
  .
-***list vars [#d441705d]
+  OK
+```
+
+##list vars
 使用中のプログラム変数の表示
+```
  >list vars(enter)
  
  List of variables --
@@ -43,8 +51,11 @@ Basicモードのプロンプトから実行可能な命令をダイレクトコ
  x
  
  >
-***list ports [#c841e60d]
+```
+ 
+##list ports
 全組み込み変数の表示
+```
  >list ports(enter)
  
  List of ports --
@@ -62,515 +73,23 @@ Basicモードのプロンプトから実行可能な命令をダイレクトコ
  
  
  >
-**run [#ae038c69]
+```
+ 
+**run
 プログラムの実行
-**new [#d4a26ef4]
+
+**new
 プログラムの消去
+```
  >new(enter)
  
  This will erase the current program!  Are you sure? y
  
  Program erased.
  >
-**cont [#k68287fc]
-STOP文で中断されたプログラムを再開します。
-**clear [#l29268c1]
-変数の内容を消去します。
- >list vars(enter)
- 
- List of variables --
- arr()               failed              c                   n
- x
- 
- >? c(enter)
- 2
- 
- READY
- >? n(enter)
- 10
- 
- READY
- >? x(enter)
- 5
- 
- READY
- >clear(enter)
- 
- >list vars(enter)
- 
- List of variables --
- arr()               failed              c                   n
- x
- 
- >? c(enter)
- 0
- 
- READY
- >? n(enter)
- 0
- 
- READY
- >? x(enter)
- 0
- 
- READY
- >
-**free [#z0063ca7]
-空きメモリの表示
- >free(enter)
- 
- Program memory: 8191 bytes free
- Variable memory: 2047 bytes free
- Dynamic memory pool (arrays): 1000 bytes free
- 
- >
-**load [#gc6cf37f]
-flashディスクに保存されているプログラムの読み込み
- >load label_test1.bas(enter)
- 
- >
-
-**save [#fe59b29c]
-flashディスクにプログラムを保存します
-ファイル名をautorun.basで保存した場合、次回SKBasic起動時に自動的に実行します。
- >save SKBasicTest.bas(enter)
- >save autorun.bas(enter)
-**delete [#kba91d17]
-flashディスクに保存されているプログラムの削除
- >delete autorun.bas(enter)
-**format [#hcee3a8a]
-flashディスクの消去
-**files [#e2a27aeb]
-flashディスクに保存されているプログラムの表示
- >files(enter)
- 
- SKBasicTest2.bas
- SKBasicTest3.bas
- rxdata_ack_test2.bas
- SKBasicTest4.bas
- SKBasicTest5.bas
- autorun.bas
- wait_test.bas
- label_test1.bas
- SKBasicTestLabel.bas
- 
- 95232 bytes available.
- >
-
-**SKコマンド　[#t2a8baf5]
-既存のSKコマンドは従来の書式そのままで入力を受け付けます。
-
- >SKINFO(enter)
- EINFO 0002 FFFF EA60 21
-
-
-*プログラムコマンド [#necc0a29]
-Basicプログラム中で実行可能な命令をプログラムコマンドと呼びます。
-
-**data [#k552cd93]
-プログラム中に数値データを列挙します。~
-後述のread文で読み込みます。
- 10 data 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
- 20 restore
- 30 read first
- 40 print "first =";first
- 50 read second
- 60 print "second =";second
-
-**read [#fe2d9b3f]
-data文で列挙したデータを変数に読み込みます。~
-読み込み前に必ずrestoreする必要があります。
-
-**restore [#j69b83c2]
-data文で列挙したデータの読み込み位置を先頭にセットします。~
-restore文実行後は必ずdata文の先頭から読み込むのでプログラム中に何回でも再読み込みが可能です。
-
-**label [#f2c68480]
-行番号にラベルを付与します。GOTO文やGOSUB文の参照先に指定出来ます。
-
- 100 label "jump_to"
-
-**goto [#x7e68e93]
-プログラムの実行位置を指定された行番号・またはラベル名に変更します。
-
- 10 goto 100
- 10 goto "jump_to"
-
-**gosub [#r3a04f60]
-プログラムの現在の実行位置をスタックに置いた上で実行位置を指定された行番号・またはラベル名に変更します。(サブルーチンコール)~
-
- 10 gosub 9000
-
-**return [#p52d21fa]
-サブルーチンから戻ります。
-
- 9000 return
-
-**if then else [#rb2389c3]
-条件分岐をします。
-
-:if 条件式 then 行番号 else 行番号|
-:if 条件式 then 命令文|
-
- >list
- 
- 100 for i=1 to 10
- 110   if (i - ((i / 2) * 2)) = 0 then print "num ";i;" is even"
- 120 next i
- 
- >run
- 
- num 2  is even
- num 4  is even
- num 6  is even
- num 8  is even
- num 10  is even
-
-**input [#tbda8f32]
-コンソールから数値を入力し変数に格納します。
-
- >input a(enter)
- ? 3
- 
- 
- READY
- >? a(enter)
- 3
- 
- READY
- >
-
-
-**print [#s8ac59b0]
-文字列や変数値をコンソールに出力します。セミコロン(;)を使用する事により連結出力が可能です。
-
- print "a = ";a
-
-**? [#idcb4a30]
-printの省略形です
-
- ? "a =";a
-
-**for next [#s8fb626f]
-開始値から終了値まで繰り返します。~
-next文の変数は省略出来ません。
-
- 10 'test1
- 20 for i = 1 to 10
- 30   sum = sum + i
- 40 next i
- 50 print "sum = ";sum
-
-**stop [#i6d56a49]
-実行中のプログラムを中断します。CONTコマンドにより再開します。
-**end [#m201d88e]
-プログラムの終了を宣言します。
-**rem [#p675dde7]
-プログラム中にコメントを記述します。プログラムの実行に何の影響も与えません。
-**' [#c34c0421]
-remの省略形です。
- 10 'test1
- 20 for i = 1 to 10
- 30   sum = sum + i
- 40 next i
- 50 print "sum = ";sum
-**dim [#k35873de]
-数値変数の配列を宣言します。
-
- 10 dim attr(10)
- 20 for i=1 to 10
- 30   attr(i)=i
- 40 next i
-
-**tron [#u9ba3885]
-現在実行しているプログラムの行番号を逐一表示します。
-**troff [#rb1a9c63]
-プログラムの行番号表示を停止します。
- >list
- 
- 10 tron
- 20 for i = 1 to 10
- 30   sum = sum + i
- 40 next i
- 50 troff
- 
- >run
- 
- [20] [30] [40] [30] [40] [30] [40] [30] [40] [30] [40] [30] [40] [30] [40] [30] [40] [30] [40] [30] [40] [50]
- 
- >
-**while endwh [#h047c9bd]
-条件式が偽になるまで繰り返します。
-
- >list
- 
- 10 c=0
- 20 while c < 10
- 30   input c
- 40 endwh
- 
- >run
- 
- ? 1
- 
- ? 5
- 
- ? 10
- 
- 
- 
- >
-
-**wait [#h36d2042]
-指定した時間だけプログラムの実行を待機します（単位はミリ秒で精度は10ミリ秒）。~
-待機時間中もプロトコルは動作を継続していますので、途中でデータを受信した場合はRXDATAハンドラが呼ばれます。~
-
- 10 on RXDATA gosub 9000
- 20 wait 10000
- 30 print "receive ";count;"packets"
- 40 end
- 9000 '
- 9010 print "rxdata ";erxmsgid
- 9020 count = count + 1
- 9030 return
-
-**sleep [#z0476378]
-指定時間のスリープをします（単位は秒）~
-スリープ中はプロトコルも動作が停止し、送受信は行われなくなります。~
-
- 10 print "sleep 10 secs"
- 20 sleep 10
- 30 print "wake"
-
-**strcat [#wfc99739]
-文字列の連結をします
-
-**strind [#g8977be0]
-文字列の指定バイト目の値を設定します。
-
- >a$="abcdefghijklmn"
- 
- READY
- >strind(a$, 5)=103
- 
- READY
- >? a$
- abcdegghijklmn
- 
- READY
- >
-
-**on gosub [#m4944068]
-割り込みサブルーチンを指定します。~
-現在2つの識別子をサポートしています。
-
-***on rxdata gosub [#r98f69b0]
-データ受信割り込みのサブルーチンを指定します。
-
-***on ack gosub [#v9533123]
-ACK受信割り込みのサブルーチンを指定します。
-
-**SKSEND [#rade4fd4]
-
-:SKSEND|
-:  <ACK>|1=送信相手からのAckを要求します。~
-0=Ackを要求しません。
-:  <SELECTOR>|セレクタ番号~
-$3e8(=1000)以上の値が指定可能
-:  <ADDR>|送信相手先ID($0001 - $ffef)
-:  <DATALEN>|送信データ長(省略可能)
-:  <DATA>|送信データ
-
- 100 msgid = SKSEND 1 1001 3 "abc"
- 100 SKSEND 1 1001 "abc"
-
-**SKBC [#r687141e]
-
-:SKBC|
-:  <RADIUS>|ブロードキャストの最大転送ホップ数(0 - 15)
-:  <SELECTOR>|セレクタ番号~
-$3e8(=1000)以上の値が指定可能
-:  <DATALEN>|送信データ長(省略可能)
-:  <DATA>|送信データ
-
- 100 msgid = SKBC 2 1001 3 "abc"
- 100 SKBC 2 1001 "abc"
-
-**SKFLASH [#g8ec157c]
-
-: SKFLASH|
-:  <SELECTOR>|セレクタ番号~
-$3e8(=1000)以上の値が指定可能
-:  <ADDR>|送信相手先ID($0001 - $ffef)
-:  <DATALEN>|送信データ長(省略可能)
-:  <DATA>|送信データ
-
-''例:$0003へ5バイトのデータを委譲送信、$0003から送信確認を受諾''
- >skflash 1001 $0003 "abcde"
- 6F59 OK
- READY
- >ERXDATA 0003 0002 6F59 03E9 50 00
- OK
-
-
-**SKINQ [#w11d9d8f]
-周辺の端末を能動的に探索して発見します。発見された端末はEDETECTイベントで通知されます。
-
-**SKPAIR [#n68208c0]
-
-:SKPAIR|
-:  <ADDR>|ペアリングを実行する相手ID($0001 – $FFEF、または$FFFF)~
-$FFFFを指定するとワイルドカード
-
-**SKUNPAIR [#u11962be]
-
-:SKUNPAIR|
-:  <ADDR>|ペアリングを実行する相手ID($0001 – $FFEF、または$FFFF)
-
-**SKNOW [#pac9c74a]
-
- >sknow(enter)
- ECLOCK 3 9 24 700 0
-
-
-*関数 [#p3d60d1c]
-**abs() [#q468dfaf]
-整数の絶対値を計算します。
-
-**sqrt() [#q4681d1f]
-整数の平方根を計算します。~
-結果は四捨五入された整数で返されます。
-
- >? sqrt(2)
- 1
- 
- READY
- >? sqrt(4)
- 2
- 
- READY
- >? sqrt(3)
- 2
- 
- READY
- >
-
-**rnd() [#f5eff6dd]
-指定値未満の乱数値を返します。
-
- >? rnd(65535)
- 12134
- 
- READY
- >? rnd(65535)
- 20941
- 
- READY
- >? rnd(65535)
- 40891
- 
- READY
- >
-
-**sgn() [#c8e2a42b]
-整数の符号を返します。
-
-**tab() [#td867d79]
-TAB文字を印字します。引数が必ず必要ですが使っていません。
-
- >? tab(1);";"
-         ;
- 
- READY
- >? tab(2);";"
-         ;
- 
- READY
- >
-**strcmp() [#p5dcdb31]
-二つの文字列を比べます。
-
-**strind() [#xba017af]
-文字列の指定バイト目の値を参照します。
-
- >a$="abcdefghijklmn"
- 
- READY
- >? strind(a$, 4)
- 101
- 
- READY
- >? strind(a$, 5)
- 102
- 
- READY
- >
-
-**strlen() [#s3facda2]
-文字列の長さを返します。
-
-**chr$() [#g2ca6762]
-数値の文字を印字します。PRINT文でのみ使用可能です。
-```
- >? chr$(105)
- i
- 
- READY
- >? chr$(106)
- j
- 
- READY
- >
 ```
 
-**hex()
-数値を16進数の8桁で印字します。PRINT文でのみ使用可能です。
-
-**hex2() 
-数値を16進数の2桁で印字します。PRINT文でのみ使用可能です。
-
-**hex4() 
-数値を16進数の4桁で印字します。PRINT文でのみ使用可能です。
-```
- >? hex($12345678)
- 12345678
- 
- READY
- >? hex2($12345678)
- 78
- 
- READY
- >? hex4($12345678)
- 5678
- 
- READY
- >
-```
-
-*組み込み変数
-**ペリフェラル
-Basicプログラム内からペリフェラルへのアクセスが可能です。
-LED1を点灯:
-```
- READY
- >led1 = 1
- 
- READY
- >print led1
- 1
-```
-
-*定数
-**10進数
-10
-**16進数
-$10
-**文字列
-"skbasic"
-**16進データ
-$"023456789abcdef"
-
-*サンプルコード
+#サンプルコード
 **for next, data, read, restore
 ```
  >list
