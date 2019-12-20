@@ -626,7 +626,7 @@ unsigned char  chckee(unsigned char  tok)
 		case  TOTOK:				// added to process TO token in FOR-TO-NEXT loop
 		case  STEPTOK:				// added to process STEP token in FOR-TO-STEP-NEXT loop
 		case  THENTOK:				// added to process THEN token in IF-THEN-ELSE statement
-#if	defined(SKBASIC_IMPL) || defined(SKBASIC_CMD)
+#if	defined(SKBASIC_IMPL) || defined(SKBASIC_CMD) || defined(SKBASIC_EMBEDDED)
 		case  SKARGTOK:
 #endif
 		pshop(CPARNTOK);

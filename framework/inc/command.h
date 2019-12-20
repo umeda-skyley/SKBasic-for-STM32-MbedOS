@@ -59,6 +59,8 @@ extern "C" {
 #define FAIL_ER10 "fail err10\r\n"
 #define RESULT_OK "ok\r\n"
 
+extern SK_UW gnWaitDuration;
+
 extern void CommandInit(void);
 extern void CommandMain(void);
 

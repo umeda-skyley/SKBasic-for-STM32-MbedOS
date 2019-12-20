@@ -649,8 +649,11 @@ PROGMEM
 #define	WAITSETTOK		0x5d
 #define	WAITJNETOK		0x5e
 #elif	defined(SKBASIC_EMBEDDED)
+#define	SKARGTOK		0x59
 #define	TIM1OK			0x5a
 #define	TIM2OK			0x5b
+#define	WAITSETTOK		0x5d
+#define	WAITJNETOK		0x5e
 #endif
 
 /*
@@ -757,6 +760,7 @@ PROGMEM
 #if defined(SKBASIC_EMBEDDED)
 #define  TIM1_STR		"TIM1"
 #define  TIM2_STR		"TIM2"
+#define  WAIT_STR		"wait"
 #endif
 
 #define  PNUM_STR		"#"
@@ -1346,8 +1350,8 @@ PROGMEM
 	{0,			TIM1_STR},		// 0x5a
 	{0,			TIM2_STR},		// 0x5b
 	{0,			" "},			// 0x5c
-	{0,			" "},			// 0x5d
-	{0,			" "},			// 0x5e
+	{rwait_set,	WAIT_STR},		// 0x5d
+	{rwait_jne,	""},			// 0x5e
 #else
 	{0,			" "},			// 0x53
 	{0,			" "},			// 0x54

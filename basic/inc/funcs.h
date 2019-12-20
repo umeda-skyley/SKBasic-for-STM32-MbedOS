@@ -138,7 +138,7 @@ void			xsksetname(void);
 void			xsksetkey(void);
 void			xwait(void);
 #elif	defined(SKBASIC_EMBEDDED)
-
+void			xwait(void);
 #endif
 
 U8				unumfun(unsigned char  token);
@@ -216,7 +216,12 @@ void			cskver(void);
 void			cskpow(void);
 void			csktable(void);
 #endif
-#if	defined(SKBASIC_CMD) || defined(SKBASIC_EMBEDDED)
+#if	defined(SKBASIC_CMD)
+void			cexit(void);
+#endif
+#if defined(SKBASIC_EMBEDDED)
+void			getbcon(void);
+void			lbcon(void);
 void			cexit(void);
 #endif
 
@@ -424,6 +429,8 @@ void			rwait_jne(void);
 #elif defined(SKBASIC_EMBEDDED)
 void			rtim1(void);
 void			rtim2(void);
+void			rwait_set(void);
+void			rwait_jne(void);
 #endif
 
 void			printonly(void);

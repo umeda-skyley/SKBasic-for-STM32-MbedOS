@@ -293,3 +293,17 @@ void			xsksetkey(void)
 
 
 #endif
+
+#if defined(SKBASIC_EMBEDDED)
+void			xwait(void)
+{
+	*tbufptr++ = WAITSETTOK;
+	forflag = TRUE;
+	blanks();							// skip blanks
+	xexpres(NUM);						// go get a numerical expression
+	*tbufptr++ = SKARGTOK;
+	*tbufptr++ = WAITJNETOK;
+	forflag = FALSE;
+	return;
+}
+#endif

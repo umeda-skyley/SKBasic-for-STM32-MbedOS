@@ -128,6 +128,7 @@ SK_UW gnTim2Interval = 0;
 //FALSE:Echoback off
 SK_BOOL gbEchoBack;
 SK_BOOL gnBasicMode;
+SK_UW	gnWaitDuration;
 
 // -------------------------------------------------
 //   Command Table
@@ -147,6 +148,8 @@ static const CMDTBL cmdtbl[] = {
 void CommandInit(void){
 	gbEchoBack = TRUE;
 	gnBasicMode = FALSE;
+
+	gnWaitDuration = 0;
 
 	gnTim1Interval = 0;
 	gnTim2Interval = 0;

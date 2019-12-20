@@ -81,6 +81,12 @@ void UART_PutChar(unsigned char c){
 //CLI systick, 10 msec interval
 void Timer_Interrupt(void){
 	SK_IncrementTimeTick(10);
+
+	if( gnWaitDuration >= 10 ){
+		gnWaitDuration -= 10;
+	}else if( gnWaitDuration > 0 ){
+		gnWaitDuration = 0;
+	}
 }
 
 #ifdef __cplusplus

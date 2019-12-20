@@ -17,6 +17,8 @@
 #include	"uart_interface.h"
 #include 	"hardware.h"
 
+extern SK_UW gnWaitDuration;
+
 static	int		findlabelline(U8 *label)
 {
 	U16								ret = 0;
@@ -119,6 +121,25 @@ void			rtim2(void)
 fail:
 	errcode = ILTOKERR;
 	rpterr();
+}
+
+void			rwait_set(void)
+{
+
+	rskipspc();
+	donexp();							// calc address
+	gnWaitDuration = pull32(&numstack, STKUNDER);
+	if(*tbufptr == SKARGTOK){
+		tbufptr++;
+	}
+	return;
+}
+
+void			rwait_jne(void)
+{
+	if(gnWaitDuration > 0){
+		--tbufptr;
+	}
 }
 
 #endif

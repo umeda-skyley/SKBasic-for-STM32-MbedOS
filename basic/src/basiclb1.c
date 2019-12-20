@@ -752,6 +752,9 @@ void  xlate(void)
 		else if (match(SKSETKEY_STR))	xsksetkey();
 #endif
 #endif
+#if defined(SKBASIC_EMBEDDED)
+		else if (match(WAIT_STR))		xwait();
+#endif
 		else							ximplet();      // if no keyword, assume implied LET
 /*
  *  The keyword has been processed, see what's left to do.
