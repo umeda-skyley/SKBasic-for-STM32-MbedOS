@@ -105,6 +105,7 @@ typedef unsigned long int 	uint64_t;
 #define FARPTR	__far
 #define	CONST	const
 #elif defined(CPUSTM32)
+#include  <stdint.h>		// this will be target-specific
 #define FARPTR
 #define	CONST const
 #else

@@ -4,7 +4,6 @@
  */
 
 #include "mbed.h"
-#include "platform/mbed_thread.h"
 #include "stats_report.h"
 #include <stdio.h>
 
@@ -45,7 +44,8 @@ int main()
 	cmd_tick.attach_us(&Timer_Interrupt, 10000); // 10msec
 
     while (true) {
-        thread_sleep_for(10000);
+        //thread_sleep_for(10000);
+    	ThisThread::sleep_for(10000);
         report.report_state();
     }
 }
