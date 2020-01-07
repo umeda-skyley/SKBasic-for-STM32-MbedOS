@@ -94,7 +94,7 @@ READY
 他にも多くのコマンドが用意されています。
 
 # サンプルコード
-## or next, data, read, restoreの使い方
+## for-next, data, read, restoreの使い方
 ```
  >list
  
